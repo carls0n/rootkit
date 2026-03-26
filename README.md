@@ -22,7 +22,7 @@ kill -62 0
 ```
 Hide port from netstat
 ```
-kill -61 tinyshell
+kill -61 8080
 ```
 To unhide port
 ```
