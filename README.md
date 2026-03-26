@@ -9,7 +9,7 @@ make
 sudo insmod rootkit.ko
 ```
 
-## Rootkit usage<br>
+#### Rootkit usage<br>
 Hide processes
 ```
 kill -62 $PID
