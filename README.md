@@ -28,11 +28,11 @@ To unhide port
 ```
 kill -61 0
 ```
-To unhide rootkit from lsmod - toggle hidden/invisible
+To unhide rootkit from lsmod - toggle hidden/invisible. Necessary to uninstall LKM
 ```
 kill -63 0
 ```
-Give root to process - i,e bash for a rootshell
+Give root to process - i.e, bash's $PID for a rootshell
 ```
 kill -64 $PID
 ```
