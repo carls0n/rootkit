@@ -1,5 +1,5 @@
 ## Generic LKM Rootkit
-Hides processes, port from netstat, module hiding and give root.
+Hides processes, hides port from netstat, module hiding and gives root.
 
 #### Compile LKM
 ```
@@ -29,7 +29,7 @@ If you have multiple processes hidden and want to unhide them all
 kill -62 0
 ```
 
-To unhide rootkit from lsmod - toggle hidden/invisible. Necessary to uninstall LKM
+To unhide rootkit from lsmod - toggle hidden/visible. Necessary to uninstall LKM
 ```
 kill -63 0
 ```
