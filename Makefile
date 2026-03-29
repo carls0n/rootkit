@@ -1,5 +1,6 @@
 # Makefile
 obj-m += rootkit.o
+ccflags-y += -w
 
 
 all:
