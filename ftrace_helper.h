@@ -110,7 +110,8 @@ static void notrace fh_ftrace_thunk(unsigned long ip, unsigned long parent_ip, s
  * the built-in ftrace_set_filter_ip() and register_ftrace_function() functions
  * provided by ftrace.h
  * */
-int fh_install_hook(struct ftrace_hook *hook)
+static inline int fh_install_hook(struct ftrace_hook *hook)
+
 {
     int err;
     err = fh_resolve_hook_address(hook);
@@ -150,7 +151,8 @@ int fh_install_hook(struct ftrace_hook *hook)
  * unregister_ftrace_function() and ftrace_set_filter_ip() functions (note the
  * opposite order to that in fh_install_hook()).
  * */
-void fh_remove_hook(struct ftrace_hook *hook)
+static inline void fh_remove_hook(struct ftrace_hook *hook)
+
 {
     int err;
     err = unregister_ftrace_function(&hook->ops);
@@ -169,7 +171,8 @@ void fh_remove_hook(struct ftrace_hook *hook)
 /* To make it easier to hook multiple functions in one module, this provides
  * a simple loop over an array of ftrace_hook struct
  * */
-int fh_install_hooks(struct ftrace_hook *hooks, size_t count)
+static inline int fh_install_hooks(struct ftrace_hook *hooks, size_t count)
+
 {
     int err;
     size_t i;
@@ -190,7 +193,8 @@ error:
     return err;
 }
 
-void fh_remove_hooks(struct ftrace_hook *hooks, size_t count)
+static inline void fh_remove_hooks(struct ftrace_hook *hooks, size_t count)
+
 {
     size_t i;
 

